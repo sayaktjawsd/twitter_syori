@@ -4,48 +4,44 @@ import datetime
 
 def get_twitter_data(keywortf,dfile):
     
-    #Python‚ÅAPI‚ð—˜—p‚·‚é‚½‚ß‚ÌƒL[AƒAƒNƒZƒXƒg[ƒNƒ“
+    #Consumer keyã€ã‚¢ã‚¯ã‚»ã‚¹ãƒˆãƒ¼ã‚¯ãƒ³
     Consumer_key = 'Ysx6a4A3cik7S7Eytu1UHUjXC'
     Consumer_secret = '50sN4jfa61ALkVxMHO6hcm7uDwP6f4UtFnYRhl67ul8Q5UEycA'
     Access_token = '860123973371150336-ia1floQCNDtn02F8z6vgIGadQ6pSSW0'
     Access_secret = '50HyVNKDv8qoFt21ZtoDdNvybE7g60Od6LTmGd2T8XjFU'
 
-    #”FØ
+    #èªè¨¼
     auth = tweepy.OAuthHandler(Consumer_key, Consumer_secret)
     auth.set_access_token(Access_token, Access_secret)
     
     api = tweepy.API(auth, wait_on_rate_limit = True)
 
-    #ŒŸõƒL[ƒ[ƒhÝ’è 
+    #æ¤œç´¢ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰
     q = keyword
     
-    #‚Â‚Ô‚â‚«‚ðŠi”[‚·‚éƒŠƒXƒg
+    #ãƒ„ã‚¤ãƒ¼ãƒˆã‚’æ ¼ç´ã™ã‚‹ãƒªã‚¹ãƒˆ
     tweets_data =[]
     
-    #ƒJ[ƒ\ƒ‹‚ðŽg—p‚µ‚Äƒf[ƒ^Žæ“¾
+    #ã‚«ãƒ¼ã‚½ãƒ«ã‚’ä½¿ç”¨ã—ã¦ãƒ‡ãƒ¼ã‚¿ã‚’å–å¾—
     for tweet in tweepy.Cursor(api.search, q=q, count=100,tweet_mode='extended').items():
-    
-    #‚Â‚Ô‚â‚«ŽžŠÔ‚ªUTC‚Ì‚½‚ßAJST‚É•ÏŠ·  ¦ƒfƒoƒbƒN—p‚ÌƒR[ƒh
-    #jsttime = tweet.created_at + datetime.timedelta(hours=9)
-    #print(jsttime)
 
-    #‚Â‚Ô‚â‚«ƒeƒLƒXƒgiFULL) ‚ðŽæ“¾
+    #ãƒ†ã‚­ã‚¹ãƒˆã‚’å–å¾—
         tweets_data.append(tweet.full_text + '\n')
 
-    #o—Íƒtƒ@ƒCƒ‹–¼
+    #å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«å
     fname = r"'"+ dfile + "'"
     fname = fname.replace("'","")
 
-    #ƒtƒ@ƒCƒ‹o—Í 
+    #å‡ºåŠ›
     with open(fname, "w",encoding="utf-8") as f:
         f.writelines(tweets_data)
     
 if __name__ == '__main__':
-    #ŒŸõƒL[ƒ[ƒh‚ð“ü—Í  ¦ƒŠƒcƒC[ƒg‚ðœŠO‚·‚éê‡ uƒL[ƒ[ƒh -RT v‚Æ“ü—Í
+    #æ¤œç´¢ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰å…¥åŠ›(ã‚­ãƒ¼ãƒ¯ãƒ¼ãƒ‰ -RTã§ãƒªãƒ„ã‚¤ãƒ¼ãƒˆé™¤å¤–)
     print ('====== Enter Serch KeyWord   =====')
     keyword = input('>  ')
         
-    #o—Íƒtƒ@ƒCƒ‹–¼‚ð“ü—Í(‘Š‘ÎƒpƒX or â‘ÎƒpƒX)        
+    #å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«åå…¥åŠ›
     print ('====== Enter Tweet Data file =====')
     dfile = input('>  ')
         
